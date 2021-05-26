@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName
 
 data class ListPictureResponse(
 
-	@field:SerializedName("ListPictureResponse")
-	val listPictureResponse: List<ListPictureResponseItem?>? = null
+	@field:SerializedName("data")
+	val data: List<ListPictureResponseItem>
 )
 
 data class ListPictureResponseItem(
 
 	@field:SerializedName("id_gambar")
-	val idGambar: String? = null,
+	val idGambar: String,
 
 	@field:SerializedName("nama_gambar")
-	val namaGambar: String? = null,
+	val namaGambar: String,
 
 	@field:SerializedName("lokasi_gambar")
-	val lokasiGambar: String? = null
+	val lokasiGambar: String
 )

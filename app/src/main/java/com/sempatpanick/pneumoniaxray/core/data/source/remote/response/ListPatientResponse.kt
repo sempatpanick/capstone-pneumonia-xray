@@ -5,20 +5,20 @@ import com.google.gson.annotations.SerializedName
 data class ListPatientResponse(
 
 	@field:SerializedName("ListPatientResponse")
-	val listPatientResponse: List<ListPatientResponseItem?>? = null
+	val listPatientResponse: List<ListPatientResponseItem>
 )
 
 data class ListPatientResponseItem(
 
 	@field:SerializedName("nomor_pasien")
-	val nomorPasien: String? = null,
+	val nomorPasien: String,
 
 	@field:SerializedName("telp")
-	val telp: String? = null,
+	val telp: String,
 
 	@field:SerializedName("nama")
-	val nama: String? = null,
+	val nama: String,
 
 	@field:SerializedName("alamat")
-	val alamat: String? = null
+	val alamat: String
 )
