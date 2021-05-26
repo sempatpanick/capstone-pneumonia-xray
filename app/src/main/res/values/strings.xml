@@ -2,6 +2,14 @@
     <string name="app_name">PneumoniaXRay</string>
     <string name="home">Home</string>
     <string name="history">History</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="picture_input">Picture..</string>
+    <string name="patient_name">Patient Name</string>
+    <string name="name_input">Name..</string>
+    <string name="scan_now">Scan Now</string>
+    <string name="result">Result :</string>
+    <string name="pneumonia">Pneumonia</string>
+    <string name="example_id_patient">#P0001</string>
+    <string name="example_patient_name">Adam Florence</string>
 </resources>
