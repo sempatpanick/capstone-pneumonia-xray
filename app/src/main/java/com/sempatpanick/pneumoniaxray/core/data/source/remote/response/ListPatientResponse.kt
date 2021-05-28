@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class ListPatientResponse(
 
-	@field:SerializedName("ListPatientResponse")
-	val listPatientResponse: List<ListPatientResponseItem>
+	@field:SerializedName("data")
+	val data: List<ListPatientResponseItem>
 )
 
 data class ListPatientResponseItem(

@@ -8,4 +8,5 @@ import javax.inject.Inject
 
 class PneumoniaInteractor @Inject constructor(private val pneumoniaRepository: PneumoniaRepository): PneumoniaUseCase {
     override fun getAllPicture() = pneumoniaRepository.getAllPicture()
+    override fun getAllPatient(query: String) = pneumoniaRepository.getAllPatient(query)
 }
