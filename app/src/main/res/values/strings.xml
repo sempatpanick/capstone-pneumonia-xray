@@ -14,4 +14,9 @@
     <string name="example_patient_name">Adam Florence</string>
     <string name="pneumonia_detection_logo">Pneumonia Detection Logo</string>
     <string name="copyright_text">© Bangkit 2021 | AlveX Team</string>
+    <string name="username">Username :</string>
+    <string name="username_input">Username..</string>
+    <string name="password">Password :</string>
+    <string name="password_input">Password..</string>
+    <string name="login">Login</string>
 </resources>

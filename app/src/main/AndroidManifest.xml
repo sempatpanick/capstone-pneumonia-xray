@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PneumoniaXRay">
-        <activity android:name=".splash_screen.SplashScreenActivity"></activity>
+        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".splash_screen.SplashScreenActivity" />
         <activity android:name=".detail.DetailHistoryActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
