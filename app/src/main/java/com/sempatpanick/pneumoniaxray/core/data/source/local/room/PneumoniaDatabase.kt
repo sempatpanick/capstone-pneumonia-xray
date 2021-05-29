@@ -2,11 +2,11 @@ package com.sempatpanick.pneumoniaxray.core.data.source.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PatientEntity
+import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.DoctorEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PictureEntity
 
 @Database(
-    entities = [PictureEntity::class, PatientEntity::class],
+    entities = [PictureEntity::class, DoctorEntity::class],
     version = 1,
     exportSchema = false
 )

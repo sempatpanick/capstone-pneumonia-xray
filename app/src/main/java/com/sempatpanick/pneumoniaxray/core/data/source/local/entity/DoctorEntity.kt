@@ -5,19 +5,19 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "patient")
-data class PatientEntity(
+@Entity(tableName = "doctor")
+data class DoctorEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "nomorPasien")
-    var nomorPasien: String,
-
-    @ColumnInfo(name = "telp")
-    var telp: String,
+    @ColumnInfo(name = "idDoctor")
+    var idDoctor: String,
 
     @ColumnInfo(name = "nama")
     var nama: String,
 
-    @ColumnInfo(name = "alamat")
-    var alamat: String
+    @ColumnInfo(name = "username")
+    var username: String,
+
+    @ColumnInfo(name = "password")
+    var password: String
 )

@@ -15,12 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.sempatpanick.pneumoniaxray.R
 import com.sempatpanick.pneumoniaxray.core.data.Resource
+import com.sempatpanick.pneumoniaxray.core.data.UserRepository
+import com.sempatpanick.pneumoniaxray.core.manager.SessionManager
 import com.sempatpanick.pneumoniaxray.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+    private lateinit var userRepository: UserRepository
     private val homeViewModel: HomeViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
@@ -37,6 +40,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
+            val sesi = SessionManager(requireContext())
+            userRepository = UserRepository.getInstance(sesi)
+
             homeViewModel.picture.observe(viewLifecycleOwner, { picture ->
                 if (picture != null) {
                     when (picture) {

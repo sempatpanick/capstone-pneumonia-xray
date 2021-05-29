@@ -1,10 +1,10 @@
 package com.sempatpanick.pneumoniaxray.core.utils
 
-import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PatientEntity
+import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.DoctorEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PictureEntity
-import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPatientResponseItem
+import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
-import com.sempatpanick.pneumoniaxray.core.domain.model.Patient
+import com.sempatpanick.pneumoniaxray.core.domain.model.Doctor
 import com.sempatpanick.pneumoniaxray.core.domain.model.Picture
 
 object DataMapper {
@@ -37,27 +37,34 @@ object DataMapper {
         lokasiGambar = input.lokasiGambar
     )
 
-    fun patientMapResponsesToEntities(input: List<ListPatientResponseItem>): List<PatientEntity> {
-        val patientList = ArrayList<PatientEntity>()
+    fun doctorMapResponsesToEntities(input: List<DataDoctor>): List<DoctorEntity> {
+        val doctorList = ArrayList<DoctorEntity>()
+
         input.map {
-            val patient = PatientEntity(
-                nomorPasien = it.nomorPasien,
-                telp = it.telp,
+            val doctor = DoctorEntity(
+                idDoctor = it.idDoctor,
                 nama = it.nama,
-                alamat = it.alamat
+                username = it.username,
+                password = it.password
             )
-            patientList.add(patient)
+            doctorList.add(doctor)
         }
-        return patientList
+        return doctorList
     }
 
-    fun patientMapEntitiesToDomain(input: List<PatientEntity>): List<Patient> =
+    fun doctorMapEntitiesToDomain(input: List<DoctorEntity>): List<Doctor> =
         input.map {
-            Patient(
-                nomorPasien = it.nomorPasien,
-                telp = it.telp,
+            Doctor(
+                idDoctor = it.idDoctor,
                 nama = it.nama,
-                alamat = it.alamat
+                username = it.username,
+                password = it.password
             )
         }
+
+    fun doctorMapDomainToEntity(input: Picture) = PictureEntity(
+        idGambar = input.idGambar,
+        namaGambar = input.namaGambar,
+        lokasiGambar = input.lokasiGambar
+    )
 }

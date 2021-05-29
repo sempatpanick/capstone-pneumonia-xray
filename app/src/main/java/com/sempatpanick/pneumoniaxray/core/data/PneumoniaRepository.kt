@@ -3,9 +3,9 @@ package com.sempatpanick.pneumoniaxray.core.data
 import com.sempatpanick.pneumoniaxray.core.data.source.local.LocalDataSource
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.RemoteDataSource
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.network.ApiResponse
-import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPatientResponseItem
+import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
-import com.sempatpanick.pneumoniaxray.core.domain.model.Patient
+import com.sempatpanick.pneumoniaxray.core.domain.model.Doctor
 import com.sempatpanick.pneumoniaxray.core.domain.model.Picture
 import com.sempatpanick.pneumoniaxray.core.domain.repository.IPneumoniaRepository
 import com.sempatpanick.pneumoniaxray.core.utils.AppExecutors
@@ -44,26 +44,25 @@ class PneumoniaRepository @Inject constructor(
 
         }.asFlow()
 
-    override fun getAllPatient(query: String): Flow<Resource<List<Patient>>> =
-        object : NetworkBoundResource<List<Patient>, List<ListPatientResponseItem>>() {
-            override fun loadFromDB(): Flow<List<Patient>> {
-                return localDataSource.getAllPatient().map {
-                    DataMapper.patientMapEntitiesToDomain(it)
+    override fun getDoctor(username: String, password: String): Flow<Resource<List<Doctor>>> =
+        object : NetworkBoundResource<List<Doctor>, List<DataDoctor>>() {
+            override fun loadFromDB(): Flow<List<Doctor>> {
+                return localDataSource.getDoctor().map {
+                    DataMapper.doctorMapEntitiesToDomain(it)
                 }
             }
 
-            override fun shouldFetch(data: List<Patient>?): Boolean =
+            override fun shouldFetch(data: List<Doctor>?): Boolean =
                 true
 
-            override suspend fun createCall(): Flow<ApiResponse<List<ListPatientResponseItem>>> =
-                remoteDataSource.getAllPatient(query)
+            override suspend fun createCall(): Flow<ApiResponse<List<DataDoctor>>> =
+                remoteDataSource.getDoctor(username, password)
 
-            override suspend fun saveCallResult(data: List<ListPatientResponseItem>) {
-                val patientList = DataMapper.patientMapResponsesToEntities(data)
-                appExecutors.diskIO().execute { localDataSource.deletePatient() }
-                localDataSource.insertPatient(patientList)
+            override suspend fun saveCallResult(data: List<DataDoctor>) {
+                val doctor = DataMapper.doctorMapResponsesToEntities(data)
+                appExecutors.diskIO().execute { localDataSource.deleteDoctor() }
+                localDataSource.insertDoctor(doctor)
             }
 
         }.asFlow()
-
 }
