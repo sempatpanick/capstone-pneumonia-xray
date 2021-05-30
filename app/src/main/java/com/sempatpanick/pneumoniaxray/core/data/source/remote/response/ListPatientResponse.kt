@@ -10,15 +10,18 @@ data class ListPatientResponse(
 
 data class ListPatientResponseItem(
 
-	@field:SerializedName("nomor_pasien")
-	val nomorPasien: String,
+	@field:SerializedName("id_pasien")
+	val id: String,
 
-	@field:SerializedName("telp")
-	val telp: String,
-
-	@field:SerializedName("nama")
+	@field:SerializedName("nm_pasien")
 	val nama: String,
 
-	@field:SerializedName("alamat")
-	val alamat: String
+	@field:SerializedName("telp_pasien")
+	val telp: String,
+
+	@field:SerializedName("almt_pasien")
+	val alamat: String,
+
+	@field:SerializedName("tgllahir_pasien")
+	val tanggal_lahir: String
 )

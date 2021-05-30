@@ -19,11 +19,11 @@ data class DataDoctor(
 	@field:SerializedName("id_dokter")
 	val idDoctor: String,
 
-	@field:SerializedName("username_dokter")
-	val username: String,
-
 	@field:SerializedName("nm_dokter")
 	val nama: String,
+
+	@field:SerializedName("username_dokter")
+	val username: String,
 
 	@field:SerializedName("password_dokter")
 	val password: String

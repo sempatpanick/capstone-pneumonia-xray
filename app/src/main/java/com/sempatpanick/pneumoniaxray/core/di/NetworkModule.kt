@@ -1,5 +1,6 @@
 package com.sempatpanick.pneumoniaxray.core.di
 
+import com.sempatpanick.pneumoniaxray.BuildConfig
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
@@ -17,11 +18,18 @@ class NetworkModule {
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .build()
+        val client = OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
+            client.addInterceptor(loggingInterceptor)
+        }
+
+        return client.build()
     }
 
     @Provides

@@ -11,11 +11,11 @@ data class ListPictureResponse(
 data class ListPictureResponseItem(
 
 	@field:SerializedName("id_gambar")
-	val idGambar: String,
+	val id: String,
 
-	@field:SerializedName("nama_gambar")
-	val namaGambar: String,
+	@field:SerializedName("nm_gambar")
+	val nama: String,
 
-	@field:SerializedName("lokasi_gambar")
-	val lokasiGambar: String
+	@field:SerializedName("url_gambar")
+	val url: String
 )

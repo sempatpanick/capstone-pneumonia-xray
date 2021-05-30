@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
                             binding.progressBar.visibility = View.GONE
                             val items = ArrayList<String>()
                             for (data in picture.data!!) {
-                                items.add("${data.idGambar} - ${data.namaGambar} - ${data.lokasiGambar}")
+                                items.add("${data.id} - ${data.nama} - ${data.url}")
                             }
                             val adapter =
                                 context?.let { ArrayAdapter(it, R.layout.items_select, items) }
@@ -95,10 +95,10 @@ class HomeFragment : Fragment() {
                     }
                 }
             })
-            homeViewModel.searchPatient.observe(viewLifecycleOwner, Observer { result ->
+            homeViewModel.searchPatient.observe(viewLifecycleOwner, { result ->
                 val patientName = arrayListOf<String?>()
                 result.map {
-                    patientName.add("${it.nomorPasien} - ${it.nama}")
+                    patientName.add("${it.id} - ${it.nama}")
                 }
                 val adapter = context?.let {
                     ArrayAdapter(
@@ -127,7 +127,7 @@ class HomeFragment : Fragment() {
                 image.isEmpty()
             }
         imageStream.subscribe {
-            showPatientMinimalAlert(it)
+            showImageMinimalAlert(it)
         }
 
         val patientStream = RxTextView.textChanges(binding.inputPatient)

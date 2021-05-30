@@ -1,5 +1,6 @@
 package com.sempatpanick.pneumoniaxray.core.data.source.remote.network
 
+import com.sempatpanick.pneumoniaxray.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,11 +9,18 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
     private fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .build()
+        val client = OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
+            client.addInterceptor(loggingInterceptor)
+        }
+
+        return client.build()
     }
 
     fun provideApiService(): ApiService {

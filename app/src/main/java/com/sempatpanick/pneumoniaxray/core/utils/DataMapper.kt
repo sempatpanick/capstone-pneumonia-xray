@@ -1,9 +1,12 @@
 package com.sempatpanick.pneumoniaxray.core.utils
 
+import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.HistoryEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.LoginEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PictureEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
+import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataHistory
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
+import com.sempatpanick.pneumoniaxray.core.domain.model.History
 import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.domain.model.Picture
 
@@ -13,9 +16,9 @@ object DataMapper {
         val pictureList = ArrayList<PictureEntity>()
         input.map {
             val picture = PictureEntity(
-                idGambar = it.idGambar,
-                namaGambar = it.namaGambar,
-                lokasiGambar = it.lokasiGambar
+                id = it.id,
+                nama = it.nama,
+                url = it.url
             )
             pictureList.add(picture)
         }
@@ -25,17 +28,11 @@ object DataMapper {
     fun pictureMapEntitiesToDomain(input: List<PictureEntity>): List<Picture> =
         input.map {
             Picture(
-                idGambar = it.idGambar,
-                namaGambar = it.namaGambar,
-                lokasiGambar = it.lokasiGambar
+                id = it.id,
+                nama = it.nama,
+                url = it.url
             )
         }
-
-    fun pictureMapDomainToEntity(input: Picture) = PictureEntity(
-        idGambar = input.idGambar,
-        namaGambar = input.namaGambar,
-        lokasiGambar = input.lokasiGambar
-    )
 
     fun loginMapResponsesToEntities(input: List<DataDoctor>): List<LoginEntity> {
         val loginList = ArrayList<LoginEntity>()
@@ -62,18 +59,41 @@ object DataMapper {
             )
         }
 
-    fun loginMapDomainToEntity(input: Login) = input.id?.let {
-        input.nama?.let { it1 ->
-            input.username?.let { it2 ->
-                input.password?.let { it3 ->
-                    LoginEntity(
-                        id = it,
-                        nama = it1,
-                        username = it2,
-                        password = it3
-                    )
-                }
-            }
+    fun historyMapResponsesToEntities(input: List<DataHistory>): List<HistoryEntity> {
+        val historyList = ArrayList<HistoryEntity>()
+        input.map {
+            val history = HistoryEntity(
+                idRiwayat = it.idRiwayat,
+                idPasien = it.idPasien,
+                namaPasien = it.namaPasien,
+                telpPasien = it.telpPasien,
+                alamatPasien = it.alamatPasien,
+                tanggalLahirPasien = it.tanggalLahirPasien,
+                idDokter = it.idDokter,
+                namaDokter = it.namaDokter,
+                idGambar = it.idGambar,
+                urlGambar = it.urlGambar,
+                prediction = it.prediction
+            )
+            historyList.add(history)
         }
+        return historyList
     }
+
+    fun historyMapEntitiesToDomain(input: List<HistoryEntity>): List<History> =
+        input.map {
+            History(
+                idRiwayat = it.idRiwayat,
+                idPasien = it.idPasien,
+                namaPasien = it.namaPasien,
+                telpPasien = it.telpPasien,
+                alamatPasien = it.alamatPasien,
+                tanggalLahirPasien = it.tanggalLahirPasien,
+                idDokter = it.idDokter,
+                namaDokter = it.namaDokter,
+                idGambar = it.idGambar,
+                urlGambar = it.urlGambar,
+                prediction = it.prediction
+            )
+        }
 }

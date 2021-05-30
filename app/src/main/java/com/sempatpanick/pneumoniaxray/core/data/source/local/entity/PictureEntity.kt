@@ -9,12 +9,12 @@ import androidx.room.PrimaryKey
 data class PictureEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "idGambar")
-    var idGambar: String,
+    @ColumnInfo(name = "id_gambar")
+    var id: String,
 
-    @ColumnInfo(name = "namaGambar")
-    var namaGambar: String,
+    @ColumnInfo(name = "nama")
+    var nama: String,
 
-    @ColumnInfo(name = "lokasiGambar")
-    var lokasiGambar: String,
+    @ColumnInfo(name = "url")
+    var url: String,
 )

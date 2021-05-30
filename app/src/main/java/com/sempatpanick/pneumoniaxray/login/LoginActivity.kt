@@ -94,9 +94,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 when (login) {
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
+                        binding.btnLogin.isEnabled = false
                     }
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
+                        binding.btnLogin.isEnabled = true
                         val dokter = Login(
                             login.data?.get(0)?.id,
                             login.data?.get(0)?.nama,
@@ -108,6 +110,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
+                        binding.btnLogin.isEnabled = true
                         Toast.makeText(
                             this,
                             login.message ?: "Oops.. Something went wrong",

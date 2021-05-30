@@ -4,7 +4,7 @@ import android.util.Log
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.network.ApiResponse
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.network.ApiService
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
-import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPatientResponseItem
+import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataHistory
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -43,6 +43,24 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
                     emit(ApiResponse.Success(response.data))
                 } else {
                     emit(ApiResponse.Error(response.message))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getAllHistory(): Flow<ApiResponse<List<DataHistory>>> {
+        //get data from remote api
+        return flow {
+            try {
+                val response = apiService.getListHistory()
+                val dataArray = response.data
+                if (dataArray.isNotEmpty()) {
+                    emit(ApiResponse.Success(response.data))
+                } else {
+                    emit(ApiResponse.Empty)
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))

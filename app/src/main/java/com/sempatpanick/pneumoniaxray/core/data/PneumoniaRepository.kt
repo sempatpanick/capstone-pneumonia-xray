@@ -4,7 +4,9 @@ import com.sempatpanick.pneumoniaxray.core.data.source.local.LocalDataSource
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.RemoteDataSource
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.network.ApiResponse
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
+import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataHistory
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
+import com.sempatpanick.pneumoniaxray.core.domain.model.History
 import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.domain.model.Picture
 import com.sempatpanick.pneumoniaxray.core.domain.repository.IPneumoniaRepository
@@ -62,6 +64,28 @@ class PneumoniaRepository @Inject constructor(
                 val login = DataMapper.loginMapResponsesToEntities(data)
                 appExecutors.diskIO().execute { localDataSource.deleteLogin() }
                 localDataSource.insertLogin(login)
+            }
+
+        }.asFlow()
+
+    override fun getAllHistory(): Flow<Resource<List<History>>> =
+        object : NetworkBoundResource<List<History>, List<DataHistory>>() {
+            override fun loadFromDB(): Flow<List<History>> {
+                return localDataSource.getAllHistory().map {
+                    DataMapper.historyMapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<History>?): Boolean =
+                true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<DataHistory>>> =
+                remoteDataSource.getAllHistory()
+
+            override suspend fun saveCallResult(data: List<DataHistory>) {
+                val historyList = DataMapper.historyMapResponsesToEntities(data)
+                appExecutors.diskIO().execute { localDataSource.deleteHistory() }
+                localDataSource.insertHistory(historyList)
             }
 
         }.asFlow()

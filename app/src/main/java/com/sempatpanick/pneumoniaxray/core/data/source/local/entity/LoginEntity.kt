@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class LoginEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "id_dokter")
     var id: String,
 
     @ColumnInfo(name = "nama")
