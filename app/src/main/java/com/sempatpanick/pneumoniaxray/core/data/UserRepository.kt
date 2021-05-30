@@ -6,16 +6,6 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val sesi: SessionManager) {
 
-    companion object {
-        @Volatile
-        private var instance: UserRepository? = null
-
-        fun getInstance(sesi: SessionManager): UserRepository =
-            instance ?: synchronized(this) {
-                instance ?: UserRepository(sesi)
-            }
-    }
-
     fun loginUser(login: Login) {
         sesi.createLoginSession()
         login.id?.let { sesi.saveToPreference(SessionManager.KEY_ID, it) }
@@ -36,4 +26,14 @@ class UserRepository @Inject constructor(private val sesi: SessionManager) {
     fun isUserLogin() = sesi.isLogin
 
     fun logoutUser() = sesi.logout()
+
+    companion object {
+        @Volatile
+        private var instance: UserRepository? = null
+
+        fun getInstance(sesi: SessionManager): UserRepository =
+            instance ?: synchronized(this) {
+                instance ?: UserRepository(sesi)
+            }
+    }
 }
