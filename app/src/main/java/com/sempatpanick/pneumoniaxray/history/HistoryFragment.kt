@@ -42,7 +42,7 @@ class HistoryFragment : Fragment() {
             val historyAdapter = HistoryAdapter()
             historyAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailHistoryActivity::class.java)
-//                intent.putExtra(DetailHistoryActivity.EXTRA_DATA, selectedData)
+                intent.putExtra(DetailHistoryActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
 
