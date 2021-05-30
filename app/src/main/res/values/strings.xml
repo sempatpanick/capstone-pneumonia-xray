@@ -5,8 +5,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_picture">Select Picture</string>
     <string name="picture_input">Picture..</string>
+    <string name="image_not_valid">Select a picture</string>
     <string name="patient_name">Patient Name</string>
     <string name="name_input">Name..</string>
+    <string name="patient_not_valid">Patient name cannot be empty</string>
     <string name="scan_now">Scan Now</string>
     <string name="result">Result :</string>
     <string name="pneumonia">Pneumonia</string>
@@ -16,7 +18,10 @@
     <string name="copyright_text">© Bangkit 2021 | AlveX Team</string>
     <string name="username">Username :</string>
     <string name="username_input">Username..</string>
+    <string name="username_not_valid">Username cannot be empty</string>
     <string name="password">Password :</string>
     <string name="password_input">Password..</string>
+    <string name="password_not_valid">Password cannot be empty</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
 </resources>

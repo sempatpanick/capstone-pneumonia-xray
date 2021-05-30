@@ -61,4 +61,6 @@ ext {
 
     hiltVersion = '2.34.1-beta'
     hiltJetpackVersion = '1.0.0-alpha03'
+
+    rxJavaVersion = '2.2.21'
 }

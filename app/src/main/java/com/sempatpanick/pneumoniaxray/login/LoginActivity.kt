@@ -1,18 +1,24 @@
 package com.sempatpanick.pneumoniaxray.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.sempatpanick.pneumoniaxray.MainActivity
+import com.sempatpanick.pneumoniaxray.R
 import com.sempatpanick.pneumoniaxray.core.data.Resource
 import com.sempatpanick.pneumoniaxray.core.data.UserRepository
 import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.manager.SessionManager
 import com.sempatpanick.pneumoniaxray.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -35,6 +41,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             moveToMain()
         }
 
+        setUp()
+
         binding.btnLogin.setOnClickListener(this)
     }
 
@@ -43,6 +51,38 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             binding.btnLogin.id -> {
                 setLogin()
             }
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun setUp() {
+
+        val usernameStream = RxTextView.textChanges(binding.inputUsername)
+            .skipInitialValue()
+            .map { username ->
+                username.isEmpty()
+            }
+        usernameStream.subscribe {
+            showUsernameMinimalAlert(it)
+        }
+
+        val passwordStream = RxTextView.textChanges(binding.inputPassword)
+            .skipInitialValue()
+            .map { password ->
+                password.isEmpty()
+            }
+        passwordStream.subscribe {
+            showPasswordMinimalAlert(it)
+        }
+
+        val invalidFieldsStream = Observable.combineLatest(
+            usernameStream,
+            passwordStream,
+            { usernameInvalid: Boolean, passwordInvalid: Boolean ->
+                !usernameInvalid && !passwordInvalid
+            })
+        invalidFieldsStream.subscribe { isValid ->
+            binding.btnLogin.isEnabled = isValid
         }
     }
 
@@ -82,5 +122,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun moveToMain() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+    }
+
+    private fun showUsernameMinimalAlert(isNotValid: Boolean) {
+        binding.inputUsername.error = if (isNotValid) getString(R.string.username_not_valid) else null
+    }
+
+    private fun showPasswordMinimalAlert(isNotValid: Boolean) {
+        binding.inputPassword.error = if (isNotValid) getString(R.string.password_not_valid) else null
     }
 }

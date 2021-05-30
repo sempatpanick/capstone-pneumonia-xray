@@ -1,5 +1,6 @@
 package com.sempatpanick.pneumoniaxray.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,12 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.sempatpanick.pneumoniaxray.R
 import com.sempatpanick.pneumoniaxray.core.data.Resource
 import com.sempatpanick.pneumoniaxray.core.data.UserRepository
 import com.sempatpanick.pneumoniaxray.core.manager.SessionManager
 import com.sempatpanick.pneumoniaxray.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -43,6 +46,8 @@ class HomeFragment : Fragment() {
             val sesi = SessionManager(requireContext())
             userRepository = UserRepository.getInstance(sesi)
 
+            setUp()
+
             homeViewModel.picture.observe(viewLifecycleOwner, { picture ->
                 if (picture != null) {
                     when (picture) {
@@ -53,7 +58,7 @@ class HomeFragment : Fragment() {
                             binding.progressBar.visibility = View.GONE
                             val items = ArrayList<String>()
                             for (data in picture.data!!) {
-                                items.add("${data.namaGambar} - ${data.lokasiGambar}")
+                                items.add("${data.idGambar} - ${data.namaGambar} - ${data.lokasiGambar}")
                             }
                             val adapter =
                                 context?.let { ArrayAdapter(it, R.layout.items_select, items) }
@@ -75,8 +80,15 @@ class HomeFragment : Fragment() {
             binding.inputPatient.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                 }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     lifecycleScope.launch {
                         homeViewModel.queryChannel.send(s.toString())
@@ -88,7 +100,13 @@ class HomeFragment : Fragment() {
                 result.map {
                     patientName.add("${it.nomorPasien} - ${it.nama}")
                 }
-                val adapter = context?.let { ArrayAdapter(it, android.R.layout.select_dialog_item, patientName) }
+                val adapter = context?.let {
+                    ArrayAdapter(
+                        it,
+                        android.R.layout.select_dialog_item,
+                        patientName
+                    )
+                }
                 adapter?.notifyDataSetChanged()
                 binding.inputPatient.setAdapter(adapter)
             })
@@ -98,5 +116,45 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    @SuppressLint("CheckResult")
+    private fun setUp() {
+
+        val imageStream = RxTextView.textChanges(binding.inputImage)
+            .skipInitialValue()
+            .map { image ->
+                image.isEmpty()
+            }
+        imageStream.subscribe {
+            showPatientMinimalAlert(it)
+        }
+
+        val patientStream = RxTextView.textChanges(binding.inputPatient)
+            .skipInitialValue()
+            .map { patient ->
+                patient.isEmpty()
+            }
+        patientStream.subscribe {
+            showPatientMinimalAlert(it)
+        }
+
+        val invalidFieldsStream = Observable.combineLatest(
+            imageStream,
+            patientStream,
+            { imageInvalid: Boolean, patientInvalid: Boolean ->
+                !imageInvalid && !patientInvalid
+            })
+        invalidFieldsStream.subscribe { isValid ->
+            binding.btnScanNow.isEnabled = isValid
+        }
+    }
+
+    private fun showPatientMinimalAlert(isNotValid: Boolean) {
+        binding.inputPatient.error = if (isNotValid) getString(R.string.patient_not_valid) else null
+    }
+
+    private fun showImageMinimalAlert(isNotValid: Boolean) {
+        binding.inputImage.error = if (isNotValid) getString(R.string.image_not_valid) else null
     }
 }

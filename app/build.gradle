@@ -57,6 +57,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
+    //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
@@ -77,6 +78,10 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.21"
+    implementation "com.jakewharton.rxbinding2:rxbinding:2.2.0"
 
     implementation "androidx.multidex:multidex:$multidexVersion"
     testImplementation "junit:junit:$junitVersion"
