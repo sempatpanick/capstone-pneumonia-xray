@@ -4,13 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class SessionManager (context: Context) {
-    companion object {
-        const val KEY_LOGIN = "isLogin"
-        const val KEY_ID = "id"
-        const val KEY_NAMA = "nama"
-        const val KEY_USERNAME = "username"
-        const val KEY_PASSWORD = "password"
-    }
 
     private var pref: SharedPreferences = context.getSharedPreferences("Session", Context.MODE_PRIVATE)
     private var editor: SharedPreferences.Editor = pref.edit()
@@ -31,4 +24,11 @@ class SessionManager (context: Context) {
 
     fun getFromPreference(key: String) = pref.getString(key, "")
 
+    companion object {
+        const val KEY_LOGIN = "isLogin"
+        const val KEY_ID = "id"
+        const val KEY_NAMA = "nama"
+        const val KEY_USERNAME = "username"
+        const val KEY_PASSWORD = "password"
+    }
 }
