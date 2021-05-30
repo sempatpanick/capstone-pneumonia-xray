@@ -1,6 +1,6 @@
 package com.sempatpanick.pneumoniaxray.core.data
 
-import com.sempatpanick.pneumoniaxray.core.domain.model.Doctor
+import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.manager.SessionManager
 import javax.inject.Inject
 
@@ -16,17 +16,17 @@ class UserRepository @Inject constructor(private val sesi: SessionManager) {
             }
     }
 
-    fun loginUser(dokter: Doctor) {
+    fun loginUser(login: Login) {
         sesi.createLoginSession()
-        dokter.idDoctor?.let { sesi.saveToPreference(SessionManager.KEY_IDDOCTOR, it) }
-        dokter.nama?.let { sesi.saveToPreference(SessionManager.KEY_NAMA, it) }
-        dokter.username?.let { sesi.saveToPreference(SessionManager.KEY_USERNAME, it) }
-        dokter.password?.let { sesi.saveToPreference(SessionManager.KEY_PASSWORD, it) }
+        login.id?.let { sesi.saveToPreference(SessionManager.KEY_ID, it) }
+        login.nama?.let { sesi.saveToPreference(SessionManager.KEY_NAMA, it) }
+        login.username?.let { sesi.saveToPreference(SessionManager.KEY_USERNAME, it) }
+        login.password?.let { sesi.saveToPreference(SessionManager.KEY_PASSWORD, it) }
     }
 
-    fun getUser(): Doctor {
-        return Doctor(
-            sesi.getFromPreference(SessionManager.KEY_IDDOCTOR),
+    fun getUser(): Login {
+        return Login(
+            sesi.getFromPreference(SessionManager.KEY_ID),
             sesi.getFromPreference(SessionManager.KEY_NAMA),
             sesi.getFromPreference(SessionManager.KEY_USERNAME),
             sesi.getFromPreference(SessionManager.KEY_PASSWORD),

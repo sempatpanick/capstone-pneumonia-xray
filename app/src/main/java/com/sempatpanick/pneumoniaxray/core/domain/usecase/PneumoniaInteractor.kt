@@ -10,5 +10,5 @@ import javax.inject.Inject
 
 class PneumoniaInteractor @Inject constructor(private val pneumoniaRepository: PneumoniaRepository): PneumoniaUseCase {
     override fun getAllPicture() = pneumoniaRepository.getAllPicture()
-    override fun getDoctor(username: String, password: String) = pneumoniaRepository.getDoctor(username, password)
+    override fun getLogin(username: String, password: String) = pneumoniaRepository.getLogin(username, password)
 }

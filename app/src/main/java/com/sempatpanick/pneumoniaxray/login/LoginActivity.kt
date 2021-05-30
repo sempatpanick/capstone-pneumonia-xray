@@ -1,22 +1,17 @@
 package com.sempatpanick.pneumoniaxray.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.sempatpanick.pneumoniaxray.MainActivity
-import com.sempatpanick.pneumoniaxray.R
 import com.sempatpanick.pneumoniaxray.core.data.Resource
 import com.sempatpanick.pneumoniaxray.core.data.UserRepository
-import com.sempatpanick.pneumoniaxray.core.domain.model.Doctor
+import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.manager.SessionManager
 import com.sempatpanick.pneumoniaxray.databinding.ActivityLoginBinding
-import com.sempatpanick.pneumoniaxray.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,19 +49,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun setLogin() {
         val username = binding.inputUsername.text.toString()
         val password = binding.inputPassword.text.toString()
-        loginViewModel.getDoctor(username, password).observe(this, { doctor ->
-            if (doctor != null) {
-                when (doctor) {
+        loginViewModel.getLogin(username, password).observe(this, { login ->
+            if (login != null) {
+                when (login) {
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        val dokter = Doctor(
-                            doctor.data?.get(0)?.idDoctor,
-                            doctor.data?.get(0)?.nama,
-                            doctor.data?.get(0)?.username,
-                            doctor.data?.get(0)?.password
+                        val dokter = Login(
+                            login.data?.get(0)?.id,
+                            login.data?.get(0)?.nama,
+                            login.data?.get(0)?.username,
+                            login.data?.get(0)?.password
                         )
                         userRepository.loginUser(dokter)
                         moveToMain()
@@ -75,7 +70,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(
                             this,
-                            doctor.message ?: "Oops.. Something went wrong",
+                            login.message ?: "Oops.. Something went wrong",
                             Toast.LENGTH_SHORT
                         ).show()
                     }

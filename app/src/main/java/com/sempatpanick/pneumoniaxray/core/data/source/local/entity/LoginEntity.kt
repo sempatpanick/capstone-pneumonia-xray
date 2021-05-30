@@ -5,12 +5,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "doctor")
-data class DoctorEntity(
+@Entity(tableName = "login")
+data class LoginEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "idDoctor")
-    var idDoctor: String,
+    @ColumnInfo(name = "id")
+    var id: String,
 
     @ColumnInfo(name = "nama")
     var nama: String,

@@ -1,10 +1,10 @@
 package com.sempatpanick.pneumoniaxray.core.utils
 
-import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.DoctorEntity
+import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.LoginEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PictureEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
-import com.sempatpanick.pneumoniaxray.core.domain.model.Doctor
+import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.domain.model.Picture
 
 object DataMapper {
@@ -37,34 +37,43 @@ object DataMapper {
         lokasiGambar = input.lokasiGambar
     )
 
-    fun doctorMapResponsesToEntities(input: List<DataDoctor>): List<DoctorEntity> {
-        val doctorList = ArrayList<DoctorEntity>()
+    fun loginMapResponsesToEntities(input: List<DataDoctor>): List<LoginEntity> {
+        val loginList = ArrayList<LoginEntity>()
 
         input.map {
-            val doctor = DoctorEntity(
-                idDoctor = it.idDoctor,
+            val login = LoginEntity(
+                id = it.idDoctor,
                 nama = it.nama,
                 username = it.username,
                 password = it.password
             )
-            doctorList.add(doctor)
+            loginList.add(login)
         }
-        return doctorList
+        return loginList
     }
 
-    fun doctorMapEntitiesToDomain(input: List<DoctorEntity>): List<Doctor> =
+    fun loginMapEntitiesToDomain(input: List<LoginEntity>): List<Login> =
         input.map {
-            Doctor(
-                idDoctor = it.idDoctor,
+            Login(
+                id = it.id,
                 nama = it.nama,
                 username = it.username,
                 password = it.password
             )
         }
 
-    fun doctorMapDomainToEntity(input: Picture) = PictureEntity(
-        idGambar = input.idGambar,
-        namaGambar = input.namaGambar,
-        lokasiGambar = input.lokasiGambar
-    )
+    fun loginMapDomainToEntity(input: Login) = input.id?.let {
+        input.nama?.let { it1 ->
+            input.username?.let { it2 ->
+                input.password?.let { it3 ->
+                    LoginEntity(
+                        id = it,
+                        nama = it1,
+                        username = it2,
+                        password = it3
+                    )
+                }
+            }
+        }
+    }
 }

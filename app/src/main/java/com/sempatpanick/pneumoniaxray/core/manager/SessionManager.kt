@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 class SessionManager (context: Context) {
     companion object {
         const val KEY_LOGIN = "isLogin"
-        const val KEY_IDDOCTOR = "id_doctor"
+        const val KEY_ID = "id"
         const val KEY_NAMA = "nama"
         const val KEY_USERNAME = "username"
         const val KEY_PASSWORD = "password"

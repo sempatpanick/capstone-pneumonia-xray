@@ -1,6 +1,6 @@
 package com.sempatpanick.pneumoniaxray.core.data.source.local
 
-import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.DoctorEntity
+import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.LoginEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.entity.PictureEntity
 import com.sempatpanick.pneumoniaxray.core.data.source.local.room.PneumoniaDao
 import kotlinx.coroutines.flow.Flow
@@ -11,10 +11,11 @@ import javax.inject.Singleton
 class LocalDataSource @Inject constructor(private val pneumoniaDao: PneumoniaDao) {
     fun getAllPicture(): Flow<List<PictureEntity>> = pneumoniaDao.getAllPicture()
     fun deletePicture() = pneumoniaDao.deletePicture()
-    suspend fun insertPicture(pictureList: List<PictureEntity>) = pneumoniaDao.insertPicture(pictureList)
+    suspend fun insertPicture(pictureList: List<PictureEntity>) =
+        pneumoniaDao.insertPicture(pictureList)
 
-    fun getDoctor(): Flow<List<DoctorEntity>> = pneumoniaDao.getDoctor()
-    fun deleteDoctor() = pneumoniaDao.deleteDoctor()
-    suspend fun insertDoctor(doctor: List<DoctorEntity>) = pneumoniaDao.insertDoctor(doctor)
+    fun getLogin(): Flow<List<LoginEntity>> = pneumoniaDao.getLogin()
+    fun deleteLogin() = pneumoniaDao.deleteLogin()
+    suspend fun insertLogin(login: List<LoginEntity>) = pneumoniaDao.insertLogin(login)
 
 }

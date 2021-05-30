@@ -34,29 +34,11 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getAllPatient(query: String): Flow<ApiResponse<List<ListPatientResponseItem>>> {
+    fun getLogin(username: String, password: String): Flow<ApiResponse<List<DataDoctor>>> {
         //get data from remote api
         return flow {
             try {
-                val response = apiService.getListPatient(query)
-                val dataArray = response.data
-                if (dataArray.isNotEmpty()) {
-                    emit(ApiResponse.Success(response.data))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
-                Log.e("RemoteDataSource", e.toString())
-            }
-        }.flowOn(Dispatchers.IO)
-    }
-
-    fun getDoctor(username: String, password: String): Flow<ApiResponse<List<DataDoctor>>> {
-        //get data from remote api
-        return flow {
-            try {
-                val response = apiService.getDoctor(username, password)
+                val response = apiService.getLogin(username, password)
                 if (response.status) {
                     emit(ApiResponse.Success(response.data))
                 } else {

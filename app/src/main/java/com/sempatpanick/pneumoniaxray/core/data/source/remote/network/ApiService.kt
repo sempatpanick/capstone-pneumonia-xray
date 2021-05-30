@@ -14,7 +14,7 @@ interface ApiService {
     suspend fun getListPatient(@Query("query") query: String): ListPatientResponse
 
     @GET("data-dokter.php")
-    suspend fun getDoctor(
+    suspend fun getLogin(
         @Query("username") username: String,
         @Query("password") password: String
     ): DoctorResponse

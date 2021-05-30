@@ -5,7 +5,7 @@ import com.sempatpanick.pneumoniaxray.core.data.source.remote.RemoteDataSource
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.network.ApiResponse
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.DataDoctor
 import com.sempatpanick.pneumoniaxray.core.data.source.remote.response.ListPictureResponseItem
-import com.sempatpanick.pneumoniaxray.core.domain.model.Doctor
+import com.sempatpanick.pneumoniaxray.core.domain.model.Login
 import com.sempatpanick.pneumoniaxray.core.domain.model.Picture
 import com.sempatpanick.pneumoniaxray.core.domain.repository.IPneumoniaRepository
 import com.sempatpanick.pneumoniaxray.core.utils.AppExecutors
@@ -44,24 +44,24 @@ class PneumoniaRepository @Inject constructor(
 
         }.asFlow()
 
-    override fun getDoctor(username: String, password: String): Flow<Resource<List<Doctor>>> =
-        object : NetworkBoundResource<List<Doctor>, List<DataDoctor>>() {
-            override fun loadFromDB(): Flow<List<Doctor>> {
-                return localDataSource.getDoctor().map {
-                    DataMapper.doctorMapEntitiesToDomain(it)
+    override fun getLogin(username: String, password: String): Flow<Resource<List<Login>>> =
+        object : NetworkBoundResource<List<Login>, List<DataDoctor>>() {
+            override fun loadFromDB(): Flow<List<Login>> {
+                return localDataSource.getLogin().map {
+                    DataMapper.loginMapEntitiesToDomain(it)
                 }
             }
 
-            override fun shouldFetch(data: List<Doctor>?): Boolean =
+            override fun shouldFetch(data: List<Login>?): Boolean =
                 true
 
             override suspend fun createCall(): Flow<ApiResponse<List<DataDoctor>>> =
-                remoteDataSource.getDoctor(username, password)
+                remoteDataSource.getLogin(username, password)
 
             override suspend fun saveCallResult(data: List<DataDoctor>) {
-                val doctor = DataMapper.doctorMapResponsesToEntities(data)
-                appExecutors.diskIO().execute { localDataSource.deleteDoctor() }
-                localDataSource.insertDoctor(doctor)
+                val login = DataMapper.loginMapResponsesToEntities(data)
+                appExecutors.diskIO().execute { localDataSource.deleteLogin() }
+                localDataSource.insertLogin(login)
             }
 
         }.asFlow()
