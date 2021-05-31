@@ -42,7 +42,9 @@ class DetailHistoryActivity : AppCompatActivity() {
             Glide.with(this@DetailHistoryActivity)
                 .load(it.urlGambar)
                 .into(binding.imgXray)
-            binding.tvPrediction.text = it.prediction
+            binding.tvPrediction.text = it.prediction.replaceFirstChar { char ->
+                char.uppercaseChar()
+            }
             binding.tvIdPatient.text = it.idPasien
             binding.tvPatientName.text = it.namaPasien
             binding.tvPatientBirthday.text = it.tanggalLahirPasien
