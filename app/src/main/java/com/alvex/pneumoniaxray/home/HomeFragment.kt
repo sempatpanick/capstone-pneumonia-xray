@@ -76,24 +76,7 @@ class HomeFragment : Fragment() {
                     }
                 }
             })
-            binding.inputPatient.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    lifecycleScope.launch {
-                        homeViewModel.queryChannel.send(s.toString())
-                    }
-                }
-            })
             homeViewModel.searchPatient.observe(viewLifecycleOwner, { result ->
                 val patientName = arrayListOf<String?>()
                 result.map {
@@ -119,7 +102,6 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun setUp() {
-
         val imageStream = RxTextView.textChanges(binding.inputImage)
             .skipInitialValue()
             .map { image ->
@@ -132,6 +114,9 @@ class HomeFragment : Fragment() {
         val patientStream = RxTextView.textChanges(binding.inputPatient)
             .skipInitialValue()
             .map { patient ->
+                lifecycleScope.launch {
+                    homeViewModel.queryChannel.send(patient.toString())
+                }
                 patient.isEmpty()
             }
         patientStream.subscribe {
