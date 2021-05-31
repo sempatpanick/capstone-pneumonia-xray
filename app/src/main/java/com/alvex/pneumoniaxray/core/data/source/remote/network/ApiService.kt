@@ -8,21 +8,18 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("data-gambar.php")
+    @GET("data-image.php")
     suspend fun getListPicture(): ListPictureResponse
 
-    @GET("data-pasien.php")
+    @GET("data-patient.php")
     suspend fun getListPatient(@Query("query") query: String): ListPatientResponse
 
-    @GET("data-pasien.php")
-    suspend fun getPatientById(@Query("id") id: String): ListPatientResponse
-
-    @GET("data-dokter.php")
+    @GET("data-doctor.php")
     suspend fun getLogin(
         @Query("username") username: String,
         @Query("password") password: String
     ): DoctorResponse
 
-    @GET("data-riwayat.php")
+    @GET("data-history.php")
     suspend fun getListHistory(): ListHistoryResponse
 }
