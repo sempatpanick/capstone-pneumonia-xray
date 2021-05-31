@@ -16,7 +16,7 @@
     <string name="patient_not_valid">Patient name cannot be empty</string>
     <string name="scan_now">Scan Now</string>
 
-    <string name="result">Result :</string>
+    <string name="result">Result</string>
     <string name="pneumonia">Pneumonia</string>
 
     <string name="example_id_patient">#P0001</string>
@@ -39,4 +39,8 @@
     <string name="address">Address</string>
     <string name="phone_number">Phone Number</string>
     <string name="x_ray_image">X-Ray Image</string>
+    <string name="prediction">Prediction</string>
+    <string name="name">Name</string>
+    <string name="code">Code</string>
+    <string name="colon">:</string>
 </resources>

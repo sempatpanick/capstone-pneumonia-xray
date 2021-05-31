@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text=":" />
+                android:text="@string/colon" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_id_patient"
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text=":" />
+                android:text="@string/colon" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_patient_name"
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text=":" />
+                android:text="@string/colon" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_patient_birthday"
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text=":" />
+                android:text="@string/colon" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_patient_age"
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text=":" />
+                android:text="@string/colon" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_patient_address"
@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text=":" />
+                android:text="@string/colon" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_patient_phone_number"
