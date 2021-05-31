@@ -11,11 +11,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alvex.pneumoniaxray.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.alvex.pneumoniaxray.core.data.UserRepository
 import com.alvex.pneumoniaxray.core.manager.SessionManager
 import com.alvex.pneumoniaxray.databinding.ActivityMainBinding
 import com.alvex.pneumoniaxray.login.LoginActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_logout) {
             userRepository.logoutUser()
-            Toast.makeText(this, "Logout success..", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.logout_message), Toast.LENGTH_SHORT).show()
             moveToLogin()
         }
         return super.onOptionsItemSelected(item)

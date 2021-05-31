@@ -33,7 +33,7 @@ class PneumoniaRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Picture>?): Boolean =
-                true
+                true || data == null || data.isEmpty() || data != null
 
             override suspend fun createCall(): Flow<ApiResponse<List<ListPictureResponseItem>>> =
                 remoteDataSource.getAllPicture()
@@ -55,7 +55,7 @@ class PneumoniaRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Login>?): Boolean =
-                true
+                true || data == null || data.isEmpty() || data != null
 
             override suspend fun createCall(): Flow<ApiResponse<List<DataDoctor>>> =
                 remoteDataSource.getLogin(username, password)
@@ -77,7 +77,7 @@ class PneumoniaRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<History>?): Boolean =
-                true
+                true || data == null || data.isEmpty() || data != null
 
             override suspend fun createCall(): Flow<ApiResponse<List<DataHistory>>> =
                 remoteDataSource.getAllHistory()

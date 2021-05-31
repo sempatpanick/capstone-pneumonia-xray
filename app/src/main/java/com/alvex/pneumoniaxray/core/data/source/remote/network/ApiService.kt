@@ -1,9 +1,6 @@
 package com.alvex.pneumoniaxray.core.data.source.remote.network
 
-import com.alvex.pneumoniaxray.core.data.source.remote.response.DoctorResponse
-import com.alvex.pneumoniaxray.core.data.source.remote.response.ListHistoryResponse
-import com.alvex.pneumoniaxray.core.data.source.remote.response.ListPatientResponse
-import com.alvex.pneumoniaxray.core.data.source.remote.response.ListPictureResponse
+import com.alvex.pneumoniaxray.core.data.source.remote.response.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -22,4 +19,11 @@ interface ApiService {
 
     @GET("data-history.php")
     suspend fun getListHistory(): ListHistoryResponse
+
+    @GET("scan.php")
+    suspend fun getScan(
+        @Query("id_patient") id_patient: String,
+        @Query("id_doctor") id_doctor: String,
+        @Query("id_image") id_image: String
+    ): ScanResponse
 }

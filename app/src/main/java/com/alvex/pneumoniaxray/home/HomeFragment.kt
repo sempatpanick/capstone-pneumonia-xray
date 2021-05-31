@@ -17,6 +17,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.alvex.pneumoniaxray.R
 import com.alvex.pneumoniaxray.core.data.Resource
 import com.alvex.pneumoniaxray.core.data.UserRepository
+import com.alvex.pneumoniaxray.core.domain.model.ScanReq
 import com.alvex.pneumoniaxray.core.manager.SessionManager
 import com.alvex.pneumoniaxray.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -94,6 +95,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 adapter?.notifyDataSetChanged()
                 binding.inputPatient.setAdapter(adapter)
             })
+
+            homeViewModel.scanData.observe(viewLifecycleOwner, { result ->
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(context, result.message, Toast.LENGTH_LONG).show()
+                if (result.status) {
+                    binding.layoutResult.visibility = View.VISIBLE
+                    binding.tvIdPatient.text = result.data?.idPatient
+                    binding.tvPatientName.text = result.data?.name
+                    binding.tvPrediction.text = result.data?.prediction
+                }
+            })
         }
     }
 
@@ -143,10 +155,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun scanNow() {
-        binding.layoutResult.visibility = View.VISIBLE
-        binding.tvIdPatient.text = "P0001"
-        binding.tvPatientName.text = "Mas Kusumo Dibyo"
-        binding.tvPrediction.text = "Pneumonia"
+        binding.progressBar.visibility = View.VISIBLE
+        val dataPost = ScanReq(
+            binding.inputPatient.text.toString().take(5),
+            userRepository.getUser().id.toString(),
+            binding.inputImage.text.toString().take(5)
+        )
+        lifecycleScope.launch {
+            homeViewModel.scanChannel.send(dataPost)
+        }
     }
 
     private fun showPatientMinimalAlert(isNotValid: Boolean) {

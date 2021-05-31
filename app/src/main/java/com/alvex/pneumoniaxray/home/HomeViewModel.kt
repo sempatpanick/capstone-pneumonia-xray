@@ -3,6 +3,7 @@ package com.alvex.pneumoniaxray.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.alvex.pneumoniaxray.core.data.source.remote.network.ApiConfig
+import com.alvex.pneumoniaxray.core.domain.model.ScanReq
 import com.alvex.pneumoniaxray.core.domain.usecase.PneumoniaUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,6 +28,13 @@ class HomeViewModel @Inject constructor(pneumoniaUseCase: PneumoniaUseCase) : Vi
         }
         .map {
             ApiConfig.provideApiService().getListPatient(it).data
+        }
+        .asLiveData()
+
+    val scanChannel = BroadcastChannel<ScanReq>(Channel.CONFLATED)
+    val scanData = scanChannel.asFlow()
+        .map {
+            ApiConfig.provideApiService().getScan(it.idPatient, it.idDoctor, it.idImage)
         }
         .asLiveData()
 }
