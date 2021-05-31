@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.alvex.pneumoniaxray.MainActivity
+import com.alvex.pneumoniaxray.main.MainActivity
 import com.alvex.pneumoniaxray.R
 import com.alvex.pneumoniaxray.core.data.Resource
 import com.alvex.pneumoniaxray.core.data.UserRepository

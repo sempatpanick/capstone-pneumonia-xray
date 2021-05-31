@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.alvex.pneumoniaxray.detail.DetailHistoryActivity" />
-        <activity android:name="com.alvex.pneumoniaxray.MainActivity" />
+        <activity android:name="com.alvex.pneumoniaxray.main.MainActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.alvex.pneumoniaxray
+package com.alvex.pneumoniaxray.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.alvex.pneumoniaxray.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.alvex.pneumoniaxray.core.data.UserRepository
 import com.alvex.pneumoniaxray.core.manager.SessionManager
