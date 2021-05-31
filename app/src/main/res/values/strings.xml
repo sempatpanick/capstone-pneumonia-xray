@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">Pneumonia Detection</string>
+
     <string name="home">Home</string>
     <string name="history">History</string>
     <string name="patient_detail">Patient Detail</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="welcome_string_message">Welcome %s</string>
+    <string name="something_wrong_message">Oops.. Something went wrong</string>
+
     <string name="select_picture">Select Picture</string>
     <string name="picture_input">Picture..</string>
     <string name="image_not_valid">Select a picture</string>
@@ -11,12 +15,14 @@
     <string name="name_input">Name..</string>
     <string name="patient_not_valid">Patient name cannot be empty</string>
     <string name="scan_now">Scan Now</string>
+
     <string name="result">Result :</string>
     <string name="pneumonia">Pneumonia</string>
+
     <string name="example_id_patient">#P0001</string>
     <string name="example_patient_name">Adam Florence</string>
+
     <string name="pneumonia_detection_logo">Pneumonia Detection Logo</string>
-    <string name="copyright_text">© Bangkit 2021 | AlveX Team</string>
     <string name="username">Username :</string>
     <string name="username_input">Username..</string>
     <string name="username_not_valid">Username cannot be empty</string>
@@ -25,6 +31,8 @@
     <string name="password_not_valid">Password cannot be empty</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="copyright_text">© Bangkit 2021 | AlveX Team</string>
+
     <string name="patient_code">Patient Code</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="age">Age</string>

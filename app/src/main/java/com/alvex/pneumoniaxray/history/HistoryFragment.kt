@@ -2,13 +2,14 @@ package com.alvex.pneumoniaxray.history
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alvex.pneumoniaxray.R
 import com.alvex.pneumoniaxray.core.data.Resource
 import com.alvex.pneumoniaxray.core.ui.HistoryAdapter
 import com.alvex.pneumoniaxray.databinding.FragmentHistoryBinding
@@ -54,7 +55,7 @@ class HistoryFragment : Fragment() {
                             binding.progressBar.visibility = View.GONE
                             Toast.makeText(
                                 context,
-                                history.message ?: "Oops.. Something went wrong",
+                                history.message ?: resources.getString(R.string.something_wrong_message),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

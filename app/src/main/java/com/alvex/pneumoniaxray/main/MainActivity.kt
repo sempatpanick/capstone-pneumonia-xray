@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val sesi = SessionManager(this)
         userRepository = UserRepository.getInstance(sesi)
 
-        Toast.makeText(this, "Welcome ${userRepository.getUser().nama}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, resources.getString(R.string.welcome_string_message, userRepository.getUser().nama), Toast.LENGTH_SHORT).show()
 
         val navView: BottomNavigationView = binding.navView
 

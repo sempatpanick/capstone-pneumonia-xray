@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
                             binding.progressBar.visibility = View.GONE
                             Toast.makeText(
                                 context,
-                                picture.message ?: "Oops.. Something went wrong",
+                                picture.message ?: resources.getString(R.string.something_wrong_message),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

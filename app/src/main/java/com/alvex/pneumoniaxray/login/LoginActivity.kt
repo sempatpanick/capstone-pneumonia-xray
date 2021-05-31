@@ -111,7 +111,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         binding.btnLogin.isEnabled = true
                         Toast.makeText(
                             this,
-                            login.message ?: "Oops.. Something went wrong",
+                            login.message ?: resources.getString(R.string.something_wrong_message),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
