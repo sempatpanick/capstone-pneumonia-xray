@@ -46,9 +46,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            binding.btnLogin.id -> {
-                setLogin()
-            }
+            binding.btnLogin.id -> setLogin()
         }
     }
 
