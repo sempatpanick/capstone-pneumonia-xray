@@ -24,7 +24,7 @@ import io.reactivex.Observable
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
     private lateinit var userRepository: UserRepository
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -46,6 +46,8 @@ class HomeFragment : Fragment() {
             userRepository = UserRepository.getInstance(sesi)
 
             setUp()
+
+            binding.btnScanNow.setOnClickListener(this)
 
             homeViewModel.picture.observe(viewLifecycleOwner, { picture ->
                 if (picture != null) {
@@ -95,6 +97,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            binding.btnScanNow.id -> scanNow()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -132,6 +140,13 @@ class HomeFragment : Fragment() {
         invalidFieldsStream.subscribe { isValid ->
             binding.btnScanNow.isEnabled = isValid
         }
+    }
+
+    private fun scanNow() {
+        binding.layoutResult.visibility = View.VISIBLE
+        binding.tvIdPatient.text = "P0001"
+        binding.tvPatientName.text = "Mas Kusumo Dibyo"
+        binding.tvPrediction.text = "Pneumonia"
     }
 
     private fun showPatientMinimalAlert(isNotValid: Boolean) {
