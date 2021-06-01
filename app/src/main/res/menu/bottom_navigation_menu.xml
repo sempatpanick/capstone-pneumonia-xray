@@ -6,6 +6,11 @@
         android:title="@string/home" />
 
     <item
+        android:id="@+id/navigation_scan"
+        android:icon="@drawable/ic_scanner_white"
+        android:title="@string/scan" />
+
+    <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_history_white"
         android:title="@string/history" />
