@@ -3,12 +3,11 @@ package com.alvex.pneumoniaxray.detail
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.alvex.pneumoniaxray.R
 import com.alvex.pneumoniaxray.core.domain.model.History
 import com.alvex.pneumoniaxray.databinding.ActivityDetailHistoryBinding
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -62,11 +61,12 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     }
 
-    private fun getAge(date: String): CharSequence? {
+    private fun getAge(date: String): CharSequence {
         val calendar = Calendar.getInstance()
-        val parseYears = date.subSequence(0,4).toString()
-        val parseMonth = date.subSequence(5,7).toString()
-        val parseDay = date.subSequence(8,10).toString()
+        val today = Calendar.getInstance()
+        val parseYears = date.subSequence(0, 4).toString()
+        val parseMonth = date.subSequence(5, 7).toString()
+        val parseDay = date.subSequence(8, 10).toString()
 
         val years = parseYears.toInt()
         val month = parseMonth.toInt()
@@ -75,7 +75,12 @@ class DetailHistoryActivity : AppCompatActivity() {
         val birth = Calendar.getInstance()
         birth.set(years, month, day)
 
-        val age = calendar.get(Calendar.YEAR) - birth.get(Calendar.YEAR)
+        var age = calendar.get(Calendar.YEAR) - birth.get(Calendar.YEAR)
+
+        if (today.get(Calendar.DAY_OF_YEAR) < birth.get(Calendar.DAY_OF_YEAR)) {
+            age--
+        }
+
         return age.toString()
     }
 }
