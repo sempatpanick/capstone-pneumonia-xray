@@ -8,9 +8,16 @@ import com.alvex.pneumoniaxray.R
 import com.alvex.pneumoniaxray.core.domain.model.History
 import com.alvex.pneumoniaxray.databinding.ActivityDetailHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class DetailHistoryActivity : AppCompatActivity() {
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
+    }
+
     private lateinit var binding: ActivityDetailHistoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,13 +55,27 @@ class DetailHistoryActivity : AppCompatActivity() {
             binding.tvIdPatient.text = it.idPasien
             binding.tvPatientName.text = it.namaPasien
             binding.tvPatientBirthday.text = it.tanggalLahirPasien
-            binding.tvPatientAge.text = "-"
+            binding.tvPatientAge.text = getAge(it.tanggalLahirPasien)
             binding.tvPatientAddress.text = it.alamatPasien
             binding.tvPatientPhoneNumber.text = it.telpPasien
         }
+
     }
 
-    companion object {
-        const val EXTRA_DATA = "extra_data"
+    private fun getAge(date: String): CharSequence? {
+        val calendar = Calendar.getInstance()
+        val parseYears = date.subSequence(0,4).toString()
+        val parseMonth = date.subSequence(5,7).toString()
+        val parseDay = date.subSequence(8,10).toString()
+
+        val years = parseYears.toInt()
+        val month = parseMonth.toInt()
+        val day = parseDay.toInt()
+
+        val birth = Calendar.getInstance()
+        birth.set(years, month, day)
+
+        val age = calendar.get(Calendar.YEAR) - birth.get(Calendar.YEAR)
+        return age.toString()
     }
 }
