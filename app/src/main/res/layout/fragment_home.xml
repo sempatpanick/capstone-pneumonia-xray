@@ -18,20 +18,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
             android:textColor="@color/black"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAlignment="center" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_doctor_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
-            tools:text="Dr. Kusumo" />
+            android:textAlignment="center"
+            tools:text="Dr. Kusumo Sujiwo" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
