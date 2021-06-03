@@ -17,6 +17,7 @@ import com.alvex.pneumoniaxray.core.manager.SessionManager
 import com.alvex.pneumoniaxray.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
+import java.lang.Exception
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -95,16 +96,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         binding.btnLogin.isEnabled = true
-                        if (login.data?.get(0)?.id != null) {
+                        try {
                             val dokter = Login(
-                                login.data[0].id,
-                                login.data[0].nama,
-                                login.data[0].username,
-                                login.data[0].password
+                                login.data?.get(0)?.id,
+                                login.data?.get(0)?.nama,
+                                login.data?.get(0)?.username,
+                                login.data?.get(0)?.password
                             )
                             userRepository.loginUser(dokter)
                             moveToMain()
-                        } else {
+                        } catch (e: Exception) {
                             Toast.makeText(this, getString(R.string.something_wrong_message), Toast.LENGTH_SHORT).show()
                         }
                     }
