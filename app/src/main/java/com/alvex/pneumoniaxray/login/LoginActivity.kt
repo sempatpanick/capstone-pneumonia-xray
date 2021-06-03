@@ -104,6 +104,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             )
                             userRepository.loginUser(dokter)
                             moveToMain()
+                        } else {
+                            Toast.makeText(this, getString(R.string.something_wrong_message), Toast.LENGTH_SHORT).show()
                         }
                     }
                     is Resource.Error -> {
