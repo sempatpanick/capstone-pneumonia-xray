@@ -95,14 +95,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         binding.btnLogin.isEnabled = true
-                        val dokter = Login(
-                            login.data?.get(0)?.id,
-                            login.data?.get(0)?.nama,
-                            login.data?.get(0)?.username,
-                            login.data?.get(0)?.password
-                        )
-                        userRepository.loginUser(dokter)
-                        moveToMain()
+                        if (login.data?.get(0)?.id != null) {
+                            val dokter = Login(
+                                login.data[0].id,
+                                login.data[0].nama,
+                                login.data[0].username,
+                                login.data[0].password
+                            )
+                            userRepository.loginUser(dokter)
+                            moveToMain()
+                        }
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
