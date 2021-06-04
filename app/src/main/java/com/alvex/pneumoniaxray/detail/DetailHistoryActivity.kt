@@ -7,6 +7,7 @@ import com.alvex.pneumoniaxray.R
 import com.alvex.pneumoniaxray.core.domain.model.History
 import com.alvex.pneumoniaxray.databinding.ActivityDetailHistoryBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -47,6 +48,8 @@ class DetailHistoryActivity : AppCompatActivity() {
         detail.let {
             Glide.with(this@DetailHistoryActivity)
                 .load(it.urlGambar)
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_loading_image))
+                .error(R.drawable.ic_error_image)
                 .into(binding.imgXray)
             binding.tvPrediction.text = it.prediction.replaceFirstChar { char ->
                 char.uppercaseChar()
