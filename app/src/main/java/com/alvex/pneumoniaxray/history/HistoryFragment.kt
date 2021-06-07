@@ -49,7 +49,11 @@ class HistoryFragment : Fragment() {
                         is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
-                            historyAdapter.setData(history.data)
+                            if (!history.data.isNullOrEmpty()) {
+                                historyAdapter.setData(history.data)
+                            } else {
+                                Toast.makeText(context, getString(R.string.something_wrong_message), Toast.LENGTH_SHORT).show()
+                            }
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE

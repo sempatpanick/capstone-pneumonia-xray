@@ -56,15 +56,19 @@ class ScanFragment : Fragment(), View.OnClickListener {
                         }
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
-                            val items = ArrayList<String>()
-                            for (data in picture.data!!) {
-                                items.add("${data.id} - ${data.nama} - ${data.url}")
+                            if (!picture.data.isNullOrEmpty()) {
+                                val items = ArrayList<String>()
+                                for (data in picture.data) {
+                                    items.add("${data.id} - ${data.nama} - ${data.url}")
+                                }
+                                val adapter =
+                                    context?.let { ArrayAdapter(it, R.layout.items_select, items) }
+                                (binding.selectImage.editText as? AutoCompleteTextView)?.setAdapter(
+                                    adapter
+                                )
+                            } else {
+                                Toast.makeText(context, getString(R.string.cannot_load_image_message), Toast.LENGTH_SHORT).show()
                             }
-                            val adapter =
-                                context?.let { ArrayAdapter(it, R.layout.items_select, items) }
-                            (binding.selectImage.editText as? AutoCompleteTextView)?.setAdapter(
-                                adapter
-                            )
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
