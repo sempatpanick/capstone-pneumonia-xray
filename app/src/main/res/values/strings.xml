@@ -35,6 +35,8 @@
     <string name="logout">Logout</string>
     <string name="copyright_text">© Bangkit 2021 | AlveX Team</string>
 
+    <string name="positive">Positive</string>
+    <string name="negative">Negative</string>
     <string name="patient_code">Patient Code</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="age">Age</string>
@@ -42,8 +44,10 @@
     <string name="phone_number">Phone Number</string>
     <string name="x_ray_image">X-Ray Image</string>
     <string name="prediction">Prediction</string>
+    <string name="doctor_name">Doctor Name</string>
     <string name="name">Name</string>
     <string name="code">Code</string>
     <string name="colon">:</string>
     <string name="logout_message">Logout success..</string>
+    <string name="closing">)</string>
 </resources>

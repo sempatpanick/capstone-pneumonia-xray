@@ -1,5 +1,6 @@
 package com.alvex.pneumoniaxray.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -51,8 +52,13 @@ class DetailHistoryActivity : AppCompatActivity() {
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_loading_image))
                 .error(R.drawable.ic_error_image)
                 .into(binding.imgXray)
-            binding.tvPrediction.text = it.prediction.replaceFirstChar { char ->
-                char.uppercaseChar()
+            binding.tvPrediction.text = "${it.prediction} ("
+            if (it.prediction == "Pneumonia") {
+                binding.tvIndicator.setTextColor(Color.rgb(255, 0, 0))
+                binding.tvIndicator.text = getString(R.string.positive)
+            } else {
+                binding.tvIndicator.setTextColor(Color.rgb(16, 200, 0))
+                binding.tvIndicator.text = getString(R.string.negative)
             }
             binding.tvIdPatient.text = it.idPasien
             binding.tvPatientName.text = it.namaPasien
@@ -60,6 +66,7 @@ class DetailHistoryActivity : AppCompatActivity() {
             binding.tvPatientAge.text = getAge(it.tanggalLahirPasien)
             binding.tvPatientAddress.text = it.alamatPasien
             binding.tvPatientPhoneNumber.text = it.telpPasien
+            binding.tvDoctorName.text = it.namaDokter
         }
 
     }
