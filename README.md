@@ -3,5 +3,5 @@ In this day and age, we all know that a deadly virus called Covid-19 is circulat
 Because of this, our Alvex team took the initiative to create a pneumonia detection application to help doctors/experts take appropriate and rapid treatment measures to detect whether a patient has pneumonia or not. If the results of our application state that you have Pneumonia, hopefully the doctor/expert can provide the right treatment. Vice versa.
 
 # FOR DEMO APPLICATION
-Username : kusumo
+Username : kusumo<br>
 Password : kusumo123
