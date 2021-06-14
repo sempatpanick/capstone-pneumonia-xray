@@ -8,7 +8,8 @@
 
     <string name="welcome">Welcome</string>
     <string name="something_wrong_message">Oops.. Something went wrong</string>
-    <string name="cannot_load_image_message">Can\'t load image, please try again</string>
+    <string name="cannot_load_image_message">Couldn\'t load image, please try again</string>
+    <string name="logout_message">Logout success..</string>
 
     <string name="select_picture">Select Picture</string>
     <string name="picture_input">Picture..</string>
@@ -48,6 +49,5 @@
     <string name="name">Name</string>
     <string name="code">Code</string>
     <string name="colon">:</string>
-    <string name="logout_message">Logout success..</string>
     <string name="closing">)</string>
 </resources>
